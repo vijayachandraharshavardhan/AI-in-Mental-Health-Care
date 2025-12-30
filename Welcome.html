@@ -1,0 +1,274 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+:root{
+  --blue:#2563eb;
+  --cyan:#00e5ff;
+}
+
+/* RESET */
+*{margin:0;padding:0;box-sizing:border-box}
+
+html,body{
+  height:100%;
+  overflow:hidden;
+  font-family:"Segoe UI",system-ui,sans-serif;
+  background:#eef4ff;
+}
+
+/* ================= PAGE ================= */
+.page{
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+}
+
+/* ================= HERO ================= */
+.hero{
+  position:relative;
+  height:75vh; /* increased hero height to cover the line */
+  background:radial-gradient(circle at top left, #2563eb, #0b1120 78%);
+  color:#fff;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+}
+
+/* refined aura */
+.hero::before,
+.hero::after{
+  content:"";
+  position:absolute;
+  width:360px;
+  height:360px;
+  border-radius:50%;
+  filter:blur(100px);
+  opacity:.45;
+  transition: all 0.6s ease-in-out;
+}
+.hero::before{
+  background:var(--cyan);
+  top:-140px;
+  right:-140px;
+}
+.hero::after{
+  background:transparent;
+}
+
+.hero-inner{
+  max-width:1200px;
+  margin:auto;
+  padding:0 28px;
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  align-items:center;
+  gap:60px;
+  position:relative;
+  z-index:2;
+  width:100%;
+}
+
+/* TEXT */
+.hero-text h3{
+  font-size:18px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  opacity:.9;
+}
+.hero-text h1{
+  font-size:clamp(36px,5vw,56px);
+  line-height:1.05;
+  margin:18px 0;
+  background:linear-gradient(90deg,#ffffff,#cbe4ff);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+.hero-text p{
+  max-width:500px;
+  font-size:17px;
+  opacity:.95;
+}
+
+/* BUTTON */
+.btn{
+  margin-top:18px;
+  padding:15px 38px;
+  font-size:16px;
+  font-weight:700;
+  border-radius:50px;
+  background:linear-gradient(135deg,#00e5ff,#2563eb);
+  color:#fff;
+  border:none;
+  cursor:pointer;
+  box-shadow:0 20px 46px rgba(0,229,255,.45);
+  transition:.3s;
+}
+.btn:hover{
+  transform:translateY(-4px);
+  box-shadow:0 30px 70px rgba(0,229,255,.6);
+}
+
+/* ================= VIDEO ================= */
+.hero-video{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.hero-video video{
+  width:100%;
+  max-width:580px;
+  opacity:.42;
+  pointer-events:none;
+
+  animation:
+    floatY 8s ease-in-out infinite,
+    breathe 18s ease-in-out infinite;
+
+  filter:
+    drop-shadow(0 0 90px rgba(0,229,255,.35))
+    brightness(1.08)
+    contrast(1.02)
+    saturate(1.12);
+
+  -webkit-mask-image:radial-gradient(
+    ellipse 60% 55% at 50% 50%,
+    rgba(0,0,0,1) 35%,
+    rgba(0,0,0,.6) 55%,
+    rgba(0,0,0,.25) 68%,
+    transparent 88%
+  );
+  mask-image:radial-gradient(
+    ellipse 60% 55% at 50% 50%,
+    rgba(0,0,0,1) 35%,
+    rgba(0,0,0,.6) 55%,
+    rgba(0,0,0,.25) 68%,
+    transparent 88%
+  );
+}
+
+@keyframes floatY{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-16px)}
+}
+
+@keyframes breathe{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.12)}
+}
+
+/* ================= CURVE ================= */
+.wave{
+  position:absolute;
+  bottom:0;
+  left:0;
+  width:100%;
+  line-height:0;
+}
+.wave svg{
+  display:block;
+  width:100%;
+  height:130px; /* increased height to cover gap */
+}
+
+/* ================= WHITE ================= */
+.white{
+  flex:1;
+  background:#ffffff;
+  display:flex;
+  align-items:center;
+  overflow:hidden;
+}
+
+/* MARQUEE */
+.marquee{width:100%;overflow:hidden}
+.track{
+  display:flex;
+  width:max-content;
+  animation:scroll 35s linear infinite;
+}
+.student{margin:0 26px}
+.student img{
+  width:210px;
+  height:140px;
+  border-radius:22px;
+  object-fit:cover;
+  box-shadow:0 22px 44px rgba(0,0,0,.22);
+}
+
+@keyframes scroll{
+  from{transform:translateX(0)}
+  to{transform:translateX(-50%)}
+}
+
+/* ================= MOBILE ================= */
+@media(max-width:900px){
+  .hero{height:80vh} /* increased for mobile too */
+  .hero-inner{
+    grid-template-columns:1fr;
+    text-align:center;
+    gap:40px;
+  }
+  .hero-video video{
+    max-width:400px;
+  }
+}
+</style>
+
+<div class="page">
+
+<section class="hero">
+  <div class="hero-inner">
+
+    <div class="hero-text">
+      <h3>AI Powered Healthcare</h3>
+      <h1>Where AI Understands Human Minds</h1>
+      <p>
+        Experience next-generation healthcare where artificial intelligence
+        analyzes, supports, and assists patients with precision and empathy.
+      </p>
+      <button class="btn">Start AI Assessment</button>
+    </div>
+
+    <div class="hero-video">
+      <video autoplay muted loop playsinline>
+        <source src="AI Health.mp4" type="video/mp4">
+      </video>
+    </div>
+
+  </div>
+
+  <div class="wave">
+    <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+      <path fill="#ffffff"
+        d="M0,60
+           C240,30 480,30 720,60
+           C960,90 1200,90 1440,60
+           L1440,120 L0,120 Z"/>
+    </svg>
+  </div>
+</section>
+
+<section class="white">
+  <div class="marquee">
+    <div class="track">
+      <div class="student"><img src="https://media.licdn.com/dms/image/v2/D4E12AQHB80xWYUCJqQ/article-cover_image-shrink_600_2000/article-cover_image-shrink_600_2000/0/1729450035360?e=2147483647&v=beta&t=26JKH5M-qTuPztmkjiQYz5Ku8w2YDVEKET_Q34HDzu8"></div>
+      <div class="student"><img src="https://medcitynews.com/wp-content/uploads/sites/7/2021/12/GettyImages-1300745916-600x337.jpg"></div>
+      <div class="student"><img src="https://res.cloudinary.com/value-penguin/image/upload/c_lfill,f_auto,h_394,w_760,dpr_1.0,q_auto/ai-in-medicine_cmkocv"></div>
+      <div class="student"><img src="https://www.mosmedicalrecordreview.com/wp-content/uploads/2025/12/how-ai-is-transforming-medical-record-review-for-medicare-set-asides.webp"></div>
+      <div class="student"><img src="https://radiologybusiness.com/sites/default/files/styles/top_stories/public/assets/articles/Stroke202d-1.jpg.webp?itok=s9aKaduA"></div>
+      <div class="student"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPnUT3XNtMGcI5ZVeO75lYgRTW4onCH1HAVQ&s"></div>
+ <div class="student"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5qjLfmxxIqDZhcqWHKwGutP6R6sltTTHUPA&s"></div>
+ <div class="student"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSe9H_YQxCn8Yw2cN0MDkshZ1bzyl-78Tq_DA&s"></div>
+ <div class="student"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkqOlySCrc6yzRbezfdh73GXXTP97yjkpnUw&s"></div>
+ <div class="student"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDmjkf1Ib74fHz1j9krcBhwKQWYTsWcsJc1Q&s"></div>
+
+
+    </div>
+  </div>
+</section>
+
+</div>
+
+{% endblock %}
